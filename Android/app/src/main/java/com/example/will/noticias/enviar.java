@@ -32,7 +32,7 @@ public class enviar extends Thread{
 
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
 
-            String message = this.Titulo+"|%|"+this.Conteudo;
+            String message = this.Titulo+"§"+this.Conteudo;
 
             channel.basicPublish(EXCHANGE_NAME, this.Rota, null, message.getBytes("UTF-8"));
             System.out.println(" [x] Sent '" + this.Rota + "':'" + message + "'");

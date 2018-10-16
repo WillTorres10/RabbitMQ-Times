@@ -22,7 +22,7 @@ public class ReceiveLogsTopic {
       System.exit(1);
     }*/
     
-    channel.queueBind(queueName, EXCHANGE_NAME, "cruzeiro");
+    channel.queueBind(queueName, EXCHANGE_NAME, "palmeiras");
     channel.queueBind(queueName, EXCHANGE_NAME, "ambos");
     
     /*for (String bindingKey : argv) {
@@ -36,7 +36,10 @@ public class ReceiveLogsTopic {
       public void handleDelivery(String consumerTag, Envelope envelope,
                                  AMQP.BasicProperties properties, byte[] body) throws IOException {
         String message = new String(body, "UTF-8");
-        System.out.println(" [x] Received '" + envelope.getRoutingKey() + "':'" + message + "'");
+        //String m = message.replace(" ", "__");
+        String []partes = message.split("§",2);
+        System.out.println("titulo: "+partes[0]+" \nConteudo: "+partes[1]);
+        //System.out.println(" [x] Received '" + envelope.getRoutingKey() + "':'" + "Titulo: "+partes[0] + "Conteudo: "+partes[1]);
       }
     };
     channel.basicConsume(queueName, true, consumer);
